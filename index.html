@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>天猫导航</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            list-style: none;
+        }
+        body{
+            background-color: pink;
+        }
+        #nav{
+            width: 900px;
+            height: 63px;
+            margin: 100px auto;
+            border-radius: 0.5em;
+            position: relative;
+            background: url('images/doubleOne.png') no-repeat right center #fff;
+        }
+        #nav ul{
+            position: relative;
+        }
+        #nav li{
+            width: 88px;
+            height: 63px;
+            float: left;
+            text-align: center;
+            line-height: 70px;
+            cursor: pointer;
+        }
+        #t_mao{
+            width: 88px;
+            height: 63px;
+            background: url('images/tMall.png') no-repeat;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+   <nav id="nav">
+       <span id="t_mao"></span>
+       <ul>
+           <li>双11狂欢</li>
+           <li>服装会场</li>
+           <li>数码家电</li>
+           <li>家具建材</li>
+           <li>母婴童装</li>
+           <li>手机会场</li>
+           <li>美妆会场</li>
+           <li>进口会场</li>
+           <li>飞猪旅行</li>
+       </ul>
+   </nav>
+
+   <script>
+       window.onload = function(){
+           //1. 获取需要的元素
+           var nav = $('nav');
+           var t_mao = nav.children[0];
+           var ul = nav.children[1];
+           var allLis = ul.children;
+           //定义鼠标移动的位置
+           var beginX = 0;
+
+           //2. 遍历
+           for (var i = 0; i < allLis.length; i++){
+               var ul = allLis[i];
+               console.log(ul);
+               //2.1 监听鼠标时间
+               ul.onmouseover = function(){
+                  end = this.offsetLeft;
+               };
+               ul.onmousedown = function(){
+                  beginX = this.offsetLeft;
+               };
+               ul.onmouseout = function(){
+                   end = beginX;
+               };
+           }
+           //3. 缓动动画
+           var begin = 0, end = 0;
+           setInterval(function(){
+               begin = begin + (end - begin) * 0.1;
+               t_mao.style.left = begin + 'px';
+           },10);
+
+         function $(id) {
+             return typeof id === 'string' ? document.getElementById(id) : null;
+         }
+       }
+   </script>
+</body>
+</html> 
